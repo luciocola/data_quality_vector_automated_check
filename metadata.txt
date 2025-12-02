@@ -1,0 +1,48 @@
+[general]
+name=UMM STAC Liability/Claims Converter
+qgisMinimumVersion=3.0
+description=Bidirectional converter between NASA UMM and STAC with liability-claims extension and quality information support
+version=1.0.0
+author=Lucio Colaiacomo
+email=your.email@example.com
+
+about=This plugin provides functionality to convert between NASA's Unified Metadata Model (UMM) and STAC (SpatioTemporal Asset Catalog) with the liability-claims extension. It supports bidirectional conversion, allowing users to import UMM data into STAC format and export STAC data to UMM format. The plugin includes full support for quality information conversion, mapping UMM DataQuality fields to ISO 19115-like quality reports in STAC's liability:quality field.
+
+tracker=https://github.com/luciocola/qgisplugin4cop/issues
+repository=https://github.com/luciocola/qgisplugin4cop
+# End of mandatory metadata
+
+# Recommended items:
+
+hasProcessingProvider=no
+# Uncomment the following line and add your changelog:
+changelog=
+    1.0.0 - Initial release
+        - UMM to STAC conversion
+        - STAC to UMM conversion
+        - Liability/Claims extension support (liability:* fields)
+        - Quality information conversion (UMM DataQuality ↔ liability:quality)
+        - ISO 19115-like quality report support
+
+# Tags are comma separated with spaces allowed
+tags=stac,umm,nasa,liability,claims,metadata,conversion,quality,iso19115
+
+homepage=https://github.com/luciocola/qgisplugin4cop
+category=Plugins
+icon=icon.png
+# experimental flag
+experimental=True
+
+# deprecated flag (applies to the whole plugin, not just a single version)
+deprecated=False
+
+# Since QGIS 3.8, a comma separated list of plugins to be installed
+# (or upgraded) can be specified.
+# Check the documentation for more information.
+# plugin_dependencies=
+
+Category of the plugin: Raster, Vector, Database or Web
+# category=Vector
+
+# If the plugin can run on QGIS Server.
+server=False

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/plugins/umm_stac_converter">
+    <file>icon.png</file>
+  </qresource>
+</RCC>
