@@ -151,18 +151,28 @@ class UMMSTACConverter:
     def run(self):
         """Run method that performs all the real work"""
         
-        # Create the dialog with elements (after translation) and keep reference
-        # Only create GUI ONCE in callback, so that it will only load when the plugin is started
-        if self.dlg is None:
-            self.dlg = ConverterDialog()
+        try:
+            # Create the dialog with elements (after translation) and keep reference
+            # Only create GUI ONCE in callback, so that it will only load when the plugin is started
+            if self.dlg is None:
+                self.dlg = ConverterDialog()
+                
+            # Show the dialog
+            self.dlg.show()
+            result = self.dlg.exec_()
             
-        # Show the dialog
-        self.dlg.show()
-        result = self.dlg.exec_()
-        
-        if result:
-            # User clicked OK - process the conversion
-            self.log_message("Conversion completed", Qgis.Info)
+            if result:
+                # User clicked OK - process the conversion
+                self.log_message("Conversion completed", Qgis.Info)
+        except Exception as e:
+            self.log_message(f"Error initializing converter dialog: {str(e)}", Qgis.Critical)
+            QMessageBox.critical(
+                self.iface.mainWindow(),
+                "Plugin Error",
+                f"Failed to initialize UMM STAC Converter:\n\n{str(e)}\n\nCheck the QGIS log for details."
+            )
+            import traceback
+            traceback.print_exc()
 
     def log_message(self, message, level=Qgis.Info):
         """Log a message to QGIS message log.
