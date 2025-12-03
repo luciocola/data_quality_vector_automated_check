@@ -7,7 +7,7 @@ from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QMessageBox
 from qgis.core import QgsMessageLog, Qgis
 
-from .converter_dialog import ConverterDialog
+# Import resources but defer dialog import to avoid premature UI loading
 from .resources import *
 
 
@@ -152,6 +152,9 @@ class UMMSTACConverter:
         """Run method that performs all the real work"""
         
         try:
+            # Import dialog here to avoid loading UI at plugin enable time
+            from .converter_dialog import ConverterDialog
+            
             # Create the dialog with elements (after translation) and keep reference
             # Only create GUI ONCE in callback, so that it will only load when the plugin is started
             if self.dlg is None:
