@@ -1,17 +1,34 @@
-# UMM STAC Liability/Claims Converter Plugin
+# UMM STAC DQ4EO Converter Plugin
 
 ## Overview
 
-This QGIS plugin enables bidirectional conversion between NASA's Unified Metadata Model (UMM) and STAC (SpatioTemporal Asset Catalog) with the liability-claims extension.
+This QGIS plugin enables bidirectional conversion between multiple geospatial metadata formats:
+- **UMM** (NASA's Unified Metadata Model)
+- **STAC** (SpatioTemporal Asset Catalog) with liability-claims extension
+- **DQ4EO** (Data Quality for Earth Observation) - ISO 19115/19157-based quality reports
 
 ## Features
 
-- **Import UMM to STAC**: Convert NASA UMM data format to STAC Items/Collections with liability-claims extension
-- **Export STAC to UMM**: Convert STAC Items/Collections to NASA UMM format
+- **UMM ↔ STAC**: Convert between NASA UMM and STAC Items/Collections with liability-claims extension
+- **UMM ↔ DQ4EO**: Convert between UMM and DQ4EO quality-focused metadata
 - **Liability/Claims Extension Support**: Full support for liability and claims metadata fields (liability:*)
-- **Quality Information Support**: Converts UMM DataQuality to/from ISO 19115-like quality reports in STAC
+- **Quality Information Support**: Comprehensive ISO 19115/19157 quality reporting
 - **Batch Processing**: Process multiple files at once
 - **Validation**: Validate converted data against schemas
+
+## Conversion Modes
+
+### 1. UMM to STAC
+Convert NASA UMM data format to STAC Items/Collections with liability-claims extension
+
+### 2. STAC to UMM
+Convert STAC Items/Collections to NASA UMM format
+
+### 3. UMM to DQ4EO (NEW!)
+Convert UMM metadata to DQ4EO quality reports with comprehensive quality elements
+
+### 4. DQ4EO to UMM (NEW!)
+Convert DQ4EO quality reports back to UMM metadata format
 
 ## Installation
 
@@ -21,22 +38,59 @@ This QGIS plugin enables bidirectional conversion between NASA's Unified Metadat
 
 ## Usage
 
-### Import UMM to STAC
+### Convert UMM to STAC
 
 1. Open the plugin dialog
 2. Select "UMM to STAC" conversion mode
-3. Choose input UMM file(s)
-4. Specify output directory
-5. Configure liability-claims extension options
+3. Choose conversion type (Item/Granule or Collection)
+4. Select input UMM file(s)
+5. Specify output directory
 6. Click "Convert"
 
-### Export STAC to UMM
+### Convert STAC to UMM
 
 1. Open the plugin dialog
 2. Select "STAC to UMM" conversion mode
-3. Choose input STAC file(s)
-4. Specify output directory
-5. Click "Convert"
+3. Choose conversion type (Item/Granule or Collection)
+4. Select input STAC file(s)
+5. Specify output directory
+6. Click "Convert"
+
+### Convert UMM to DQ4EO
+
+1. Open the plugin dialog
+2. Select "UMM to DQ4EO" conversion mode
+3. Choose conversion type (Item/Granule or Collection)
+4. Select input UMM file(s)
+5. Specify output directory
+6. Click "Convert"
+
+### Convert DQ4EO to UMM
+
+1. Open the plugin dialog
+2. Select "DQ4EO to UMM" conversion mode
+3. Choose conversion type (Item/Granule or Collection)
+4. Select input DQ4EO file(s)
+5. Specify output directory
+6. Click "Convert"
+
+## DQ4EO Format
+
+DQ4EO (Data Quality for Earth Observation) is a quality-focused metadata format based on ISO 19115/19157 standards. It provides comprehensive quality reporting for Earth observation data.
+
+For detailed information about DQ4EO conversion, see [DQ4EO_CONVERSION.md](DQ4EO_CONVERSION.md).
+
+### DQ4EO Quality Elements
+
+- DQ_CompletenessCommission
+- DQ_AbsoluteExternalPositionalAccuracy
+- DQ_ProcessingLevel
+- DQ_RadiometricAccuracy
+- DQ_CloudCoverage
+- DQ_ThematicClassificationCorrectness
+- DQ_TemporalValidity
+- DQ_UsabilityElement
+- DQ_Lineage
 
 ## UMM Format
 

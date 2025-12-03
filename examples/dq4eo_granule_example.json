@@ -1,0 +1,103 @@
+{
+  "type": "DQ4EO-QualityReport",
+  "version": "1.0.0",
+  "reportId": "DQ4EO-LANDSAT8-2025-001",
+  "scope": {
+    "level": "dataset",
+    "extent": {
+      "geographic": {
+        "westBoundLongitude": -122.5,
+        "eastBoundLongitude": -122.0,
+        "southBoundLatitude": 37.5,
+        "northBoundLatitude": 38.0
+      }
+    }
+  },
+  "reportDate": "2025-12-03T10:30:00Z",
+  "metadata": {
+    "resourceId": "LANDSAT8_LC08_L1TP_044034_20251201",
+    "resourceType": "granule",
+    "temporalExtent": {
+      "begin": "2025-12-01T18:45:00Z",
+      "end": "2025-12-01T18:45:30Z"
+    },
+    "parentCollection": "LANDSAT_8_C2_L1"
+  },
+  "qualityElements": [
+    {
+      "elementType": "DQ_AbsoluteExternalPositionalAccuracy",
+      "measure": "Geometric accuracy",
+      "result": {
+        "value": 12.0,
+        "unit": "meters",
+        "valueType": "Real"
+      },
+      "evaluationMethod": "Ground control points comparison"
+    },
+    {
+      "elementType": "DQ_CloudCoverage",
+      "measure": "Cloud coverage percentage",
+      "result": {
+        "value": 5.2,
+        "unit": "percent",
+        "valueType": "Real"
+      },
+      "evaluationMethod": "Automated cloud detection algorithm"
+    },
+    {
+      "elementType": "DQ_ProcessingLevel",
+      "measure": "Processing level",
+      "result": {
+        "value": "L1TP",
+        "description": "Terrain Precision Corrected",
+        "valueType": "CharacterString"
+      },
+      "evaluationMethod": "USGS EROS processing standard"
+    },
+    {
+      "elementType": "DQ_RadiometricAccuracy",
+      "measure": "Radiometric calibration accuracy",
+      "result": {
+        "value": 3.0,
+        "unit": "percent",
+        "valueType": "Real"
+      },
+      "evaluationMethod": "Pre-flight and on-orbit calibration"
+    },
+    {
+      "elementType": "DQ_CompletenessCommission",
+      "measure": "Data completeness",
+      "result": {
+        "value": true,
+        "pass": true,
+        "valueType": "Boolean"
+      },
+      "evaluationMethod": "Scene coverage analysis"
+    }
+  ],
+  "lineage": {
+    "statement": "Landsat 8 OLI/TIRS Level-1 Precision Terrain corrected data processed by USGS EROS",
+    "processSteps": [
+      {
+        "description": "Radiometric calibration",
+        "dateTime": "2025-12-01T20:00:00Z",
+        "processor": {
+          "organization": "USGS EROS",
+          "software": "LPGS v15.5.0"
+        }
+      },
+      {
+        "description": "Geometric correction using GLS2000 control",
+        "dateTime": "2025-12-01T20:15:00Z",
+        "processor": {
+          "organization": "USGS EROS",
+          "software": "LPGS v15.5.0"
+        }
+      },
+      {
+        "description": "Quality assessment and metadata generation",
+        "dateTime": "2025-12-01T20:30:00Z"
+      }
+    ]
+  }
+}

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>UMM STAC Converter</string>
+   <string>UMM STAC DQ4EO Converter</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -19,18 +19,32 @@
      <property name="title">
       <string>Conversion Mode</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
        <widget class="QRadioButton" name="radioUmmToStac">
         <property name="text">
          <string>UMM to STAC</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="1">
        <widget class="QRadioButton" name="radioStacToUmm">
         <property name="text">
          <string>STAC to UMM</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioUmmToDq4eo">
+        <property name="text">
+         <string>UMM to DQ4EO</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QRadioButton" name="radioDq4eoToUmm">
+        <property name="text">
+         <string>DQ4EO to UMM</string>
         </property>
        </widget>
       </item>

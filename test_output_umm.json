@@ -1,0 +1,68 @@
+{
+  "GranuleUR": "example-stac-item-001",
+  "ProviderDates": [
+    {
+      "Date": "2023-01-15T10:30:00Z",
+      "Type": "Create"
+    }
+  ],
+  "CollectionReference": {
+    "ShortName": "EXAMPLE_COLLECTION_V1"
+  },
+  "DataGranule": {
+    "ProductionDateTime": "2023-01-15T10:30:00Z"
+  },
+  "TemporalExtent": {
+    "SingleDateTime": "2023-01-15T12:00:00Z"
+  },
+  "SpatialExtent": {
+    "HorizontalSpatialDomain": {
+      "Geometry": {
+        "BoundingRectangle": {
+          "WestBoundingCoordinate": -180.0,
+          "SouthBoundingCoordinate": -90.0,
+          "EastBoundingCoordinate": 180.0,
+          "NorthBoundingCoordinate": 90.0
+        }
+      }
+    }
+  },
+  "RelatedUrls": [
+    {
+      "URL": "./collection.json",
+      "Type": "VIEW RELATED INFORMATION",
+      "MimeType": "application/json"
+    },
+    {
+      "URL": "https://example.com/data/granule-001.tif",
+      "Type": "GET DATA",
+      "Description": "Download Granule Data",
+      "MimeType": "image/tiff"
+    }
+  ],
+  "UseConstraints": {
+    "Description": "Data provided under open license with liability limitations",
+    "LicenseText": "Users assume all liability for data usage",
+    "LicenseURL": {
+      "URL": "https://example.com/license"
+    }
+  },
+  "AccessConstraints": {
+    "Description": "Claims must be filed within 30 days",
+    "Value": 30
+  },
+  "ContactPersons": [
+    {
+      "FirstName": "John",
+      "LastName": "Doe",
+      "ContactInformation": {
+        "ContactMechanisms": [
+          {
+            "Type": "Email",
+            "Value": "john.doe@example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/cop/v1.0.0/schema.json"
+  ],
+  "id": "example-granule-001",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          -90.0
+        ],
+        [
+          180.0,
+          90.0
+        ],
+        [
+          -180.0,
+          90.0
+        ],
+        [
+          -180.0,
+          -90.0
+        ]
+      ]
+    ]
+  },
+  "bbox": [
+    -180.0,
+    -90.0,
+    180.0,
+    90.0
+  ],
+  "properties": {
+    "datetime": "2023-01-15T00:00:00Z",
+    "created": "2023-01-15T10:30:00Z",
+    "updated": "2023-01-15T10:30:00Z",
+    "platform": "Landsat-8",
+    "instruments": [
+      "OLI"
+    ],
+    "collection": "EXAMPLE_COLLECTION_V1",
+    "cop:liability": {
+      "description": "Data provided under open license with liability limitations",
+      "license_text": "Users assume all liability for data usage",
+      "license_url": "https://example.com/license"
+    },
+    "cop:claim": {
+      "description": "Claims must be filed within 30 days",
+      "value": 30
+    },
+    "cop:liability_contact": {
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    }
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "",
+      "type": "application/geo+json"
+    },
+    {
+      "rel": "get data",
+      "href": "https://example.com/data/granule-001.tif",
+      "title": "Download Granule Data",
+      "type": "image/tiff"
+    }
+  ],
+  "assets": {
+    "data_0": {
+      "href": "https://example.com/data/granule-001.tif",
+      "title": "Download Granule Data",
+      "type": "image/tiff",
+      "roles": [
+        "data"
+      ]
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "type": "DQ4EO-QualityReport",
+  "version": "1.0.0",
+  "reportId": "DQ4EO-SENTINEL2-COLLECTION",
+  "scope": {
+    "level": "series",
+    "extent": {
+      "geographic": {
+        "westBoundLongitude": -180.0,
+        "eastBoundLongitude": 180.0,
+        "southBoundLatitude": -90.0,
+        "northBoundLatitude": 90.0
+      }
+    }
+  },
+  "reportDate": "2025-12-03T10:30:00Z",
+  "metadata": {
+    "resourceId": "SENTINEL-2-L2A",
+    "resourceType": "collection",
+    "title": "Sentinel-2 MSI Level-2A Surface Reflectance",
+    "abstract": "Sentinel-2 Multi-Spectral Instrument (MSI) Level-2A Bottom-of-Atmosphere reflectance data with atmospheric correction applied",
+    "temporalExtent": {
+      "begin": "2015-06-23T00:00:00Z",
+      "end": "9999-12-31T23:59:59Z"
+    }
+  },
+  "qualityElements": [
+    {
+      "elementType": "DQ_ThematicClassificationCorrectness",
+      "measure": "Scene classification accuracy",
+      "result": {
+        "value": 85.0,
+        "unit": "percent",
+        "valueType": "Real"
+      },
+      "evaluationMethod": "Sen2Cor scene classification validation against reference data"
+    },
+    {
+      "elementType": "DQ_AbsoluteExternalPositionalAccuracy",
+      "measure": "Geometric accuracy (multispectral)",
+      "result": {
+        "value": 20.0,
+        "unit": "meters",
+        "valueType": "Real",
+        "pass": true
+      },
+      "evaluationMethod": "Global Reference Image validation"
+    },
+    {
+      "elementType": "DQ_ProcessingLevel",
+      "measure": "Collection processing level",
+      "result": {
+        "value": "L2A",
+        "description": "Bottom-of-Atmosphere reflectance with atmospheric correction",
+        "valueType": "CharacterString"
+      },
+      "evaluationMethod": "ESA Sentinel-2 processing baseline"
+    },
+    {
+      "elementType": "DQ_UsabilityElement",
+      "measure": "Data quality flag availability",
+      "result": {
+        "value": "Quality indicators provided including cloud masks, snow/ice masks, and quality flags per pixel",
+        "valueType": "CharacterString"
+      },
+      "evaluationMethod": "Product specification compliance"
+    },
+    {
+      "elementType": "DQ_TemporalValidity",
+      "measure": "Revisit time",
+      "result": {
+        "value": 5.0,
+        "unit": "days",
+        "valueType": "Real"
+      },
+      "evaluationMethod": "Constellation design (2 satellites)"
+    }
+  ],
+  "lineage": {
+    "statement": "Sentinel-2 MSI data is systematically processed to Level-2A using the Sen2Cor atmospheric correction processor. The processing includes radiometric calibration, geometric correction, cloud and cloud shadow detection, and atmospheric correction to derive bottom-of-atmosphere reflectance.",
+    "processSteps": [
+      {
+        "description": "Level-1C to Level-2A atmospheric correction",
+        "rationale": "Convert Top-of-Atmosphere reflectance to Bottom-of-Atmosphere reflectance",
+        "processor": {
+          "organization": "ESA",
+          "software": "Sen2Cor v2.10"
+        }
+      },
+      {
+        "description": "Scene classification",
+        "rationale": "Identify clouds, cloud shadows, vegetation, water, snow, etc.",
+        "processor": {
+          "organization": "ESA",
+          "software": "Sen2Cor v2.10"
+        }
+      },
+      {
+        "description": "Quality indicator generation",
+        "rationale": "Generate pixel-level quality flags and masks"
+      }
+    ]
+  }
+}

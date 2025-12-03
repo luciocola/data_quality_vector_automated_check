@@ -11,6 +11,8 @@ from qgis.core import QgsMessageLog, Qgis
 
 from .umm_to_stac import UMMToSTACConverter
 from .stac_to_umm import STACToUMMConverter
+from .umm_to_dq4eo import UMMToDQ4EOConverter
+from .dq4eo_to_umm import DQ4EOToUMMConverter
 
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -43,8 +45,14 @@ class ConversionWorker(QThread):
         try:
             if self.conversion_mode == 'umm_to_stac':
                 converter = UMMToSTACConverter()
-            else:
+            elif self.conversion_mode == 'stac_to_umm':
                 converter = STACToUMMConverter()
+            elif self.conversion_mode == 'umm_to_dq4eo':
+                converter = UMMToDQ4EOConverter()
+            elif self.conversion_mode == 'dq4eo_to_umm':
+                converter = DQ4EOToUMMConverter()
+            else:
+                raise ValueError(f"Unknown conversion mode: {self.conversion_mode}")
             
             total = len(self.input_files)
             success_count = 0
@@ -57,7 +65,11 @@ class ConversionWorker(QThread):
                 base_name = os.path.splitext(os.path.basename(input_file))[0]
                 if self.conversion_mode == 'umm_to_stac':
                     output_file = os.path.join(self.output_dir, f"{base_name}_stac.json")
-                else:
+                elif self.conversion_mode == 'stac_to_umm':
+                    output_file = os.path.join(self.output_dir, f"{base_name}_umm.json")
+                elif self.conversion_mode == 'umm_to_dq4eo':
+                    output_file = os.path.join(self.output_dir, f"{base_name}_dq4eo.json")
+                elif self.conversion_mode == 'dq4eo_to_umm':
                     output_file = os.path.join(self.output_dir, f"{base_name}_umm.json")
                 
                 # Convert file
@@ -100,6 +112,8 @@ class ConverterDialog(QDialog, FORM_CLASS):
         # Set up conversion mode
         self.radioUmmToStac.toggled.connect(self.update_ui_state)
         self.radioStacToUmm.toggled.connect(self.update_ui_state)
+        self.radioUmmToDq4eo.toggled.connect(self.update_ui_state)
+        self.radioDq4eoToUmm.toggled.connect(self.update_ui_state)
         
         # Set defaults
         self.radioUmmToStac.setChecked(True)
@@ -154,8 +168,15 @@ class ConverterDialog(QDialog, FORM_CLASS):
         # Get conversion settings
         if self.radioUmmToStac.isChecked():
             conversion_mode = 'umm_to_stac'
-        else:
+        elif self.radioStacToUmm.isChecked():
             conversion_mode = 'stac_to_umm'
+        elif self.radioUmmToDq4eo.isChecked():
+            conversion_mode = 'umm_to_dq4eo'
+        elif self.radioDq4eoToUmm.isChecked():
+            conversion_mode = 'dq4eo_to_umm'
+        else:
+            QMessageBox.warning(self, "Warning", "Please select a conversion mode.")
+            return
         
         if self.radioItem.isChecked():
             conversion_type = 'item'
@@ -220,6 +241,8 @@ class ConverterDialog(QDialog, FORM_CLASS):
         self.btnConvert.setEnabled(enabled)
         self.radioUmmToStac.setEnabled(enabled)
         self.radioStacToUmm.setEnabled(enabled)
+        self.radioUmmToDq4eo.setEnabled(enabled)
+        self.radioDq4eoToUmm.setEnabled(enabled)
         self.radioItem.setEnabled(enabled)
         self.radioCollection.setEnabled(enabled)
     
