@@ -132,10 +132,10 @@ class UMMSTACConverter:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = os.path.join(self.plugin_dir, 'icon.png')
+        icon_path = ':/plugins/umm_stac_converter/icon.png'
         self.add_action(
             icon_path,
-            text=self.tr('UMM STAC Converter'),
+            text=self.tr('UMM STAC DQ4EO Converter'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
