@@ -1,0 +1,25 @@
+[
+  {
+    "id": "roads-elevation-snap-candidates",
+    "name": "Road near-node elevation check",
+    "description": "Find close road endpoints where elevation is equal and snapping is recommended.",
+    "keywords": ["road", "elevation", "topology", "snap", "connect"],
+    "action": "check_road_endpoint_snap_candidates",
+    "params": {
+      "tolerance_m": 0.01,
+      "elevation_field": "elevation"
+    }
+  },
+  {
+    "id": "railroad-osm-id-snap-candidates",
+    "name": "Railroad near-node OSM ID check",
+    "description": "Find close railroad endpoints with the same osm_id and recommend connecting them.",
+    "keywords": ["railroad", "railway", "osm_id", "topology", "snap", "connect"],
+    "action": "check_road_endpoint_snap_candidates",
+    "params": {
+      "tolerance_m": 0.01,
+      "elevation_field": "osm_id",
+      "select_candidates": true
+    }
+  }
+]

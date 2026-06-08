@@ -1,0 +1,16 @@
+[general]
+name=Data Quality Check for Vectors
+qgisMinimumVersion=3.22
+description=Area-based attribute, schema homogeneity, topology and guideline-driven quality checks for vector layers
+version=0.1.1
+author=Lucio Colaiacomo
+email=lucio@example.com
+
+about=This plugin validates vector data quality in a selected map area. It checks empty required fields, field-name consistency across layers, geometry validity, and line endpoint proximity guidelines. It also includes a local RAG-like guideline engine where users can define reusable validation guidelines for specific use cases.
+
+tags=quality,validation,topology,vector,attributes,rag,qgis
+
+category=Vector
+icon=icon.svg
+experimental=True
+deprecated=False

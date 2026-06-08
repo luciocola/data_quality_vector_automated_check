@@ -1,0 +1,12 @@
+[
+  {
+    "id": "cadastre-owner-required",
+    "name": "Owner must be filled",
+    "description": "Ensure owner field is not empty for cadastral layers.",
+    "keywords": ["cadastre", "owner", "mandatory", "quality"],
+    "action": "require_field_not_empty",
+    "params": {
+      "field": "owner"
+    }
+  }
+]

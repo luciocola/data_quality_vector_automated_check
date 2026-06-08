@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <style>
+      .bg { fill: #f8fbff; }
+      .box { fill: #ffffff; stroke: #1f4f7a; stroke-width: 2; rx: 10; }
+      .title { font: 700 24px 'Helvetica Neue', Arial, sans-serif; fill: #163a59; }
+      .h2 { font: 700 18px 'Helvetica Neue', Arial, sans-serif; fill: #163a59; }
+      .p { font: 14px 'Helvetica Neue', Arial, sans-serif; fill: #244b6b; }
+      .arrow { stroke: #2e6f9e; stroke-width: 3; fill: none; marker-end: url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2e6f9e"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="520"/>
+  <text class="title" x="40" y="46">Data Quality Check for Vectors - Processing Flow</text>
+
+  <rect class="box" x="40" y="90" width="240" height="120"/>
+  <text class="h2" x="60" y="128">1. Select Inputs</text>
+  <text class="p" x="60" y="155">- Pick area (extent or rectangle)</text>
+  <text class="p" x="60" y="176">- Choose vector layers</text>
+  <text class="p" x="60" y="197">- Choose profile</text>
+
+  <rect class="box" x="340" y="90" width="240" height="120"/>
+  <text class="h2" x="360" y="128">2. Core Checks</text>
+  <text class="p" x="360" y="155">- Required fields</text>
+  <text class="p" x="360" y="176">- Schema homogeneity</text>
+  <text class="p" x="360" y="197">- Geometry validity</text>
+
+  <rect class="box" x="640" y="90" width="240" height="120"/>
+  <text class="h2" x="660" y="128">3. Guidelines Engine</text>
+  <text class="p" x="660" y="155">- Lexical or embeddings retrieval</text>
+  <text class="p" x="660" y="176">- Optional Ollama assistance</text>
+  <text class="p" x="660" y="197">- Deterministic operations</text>
+
+  <rect class="box" x="940" y="90" width="220" height="120"/>
+  <text class="h2" x="960" y="128">4. Outputs</text>
+  <text class="p" x="960" y="155">- Report panel</text>
+  <text class="p" x="960" y="176">- JSON / HTML / PDF</text>
+  <text class="p" x="960" y="197">- Optional edits in layers</text>
+
+  <path class="arrow" d="M280 150 L340 150"/>
+  <path class="arrow" d="M580 150 L640 150"/>
+  <path class="arrow" d="M880 150 L940 150"/>
+
+  <rect class="box" x="120" y="280" width="960" height="180"/>
+  <text class="h2" x="150" y="320">Guidelines Manager (human-friendly)</text>
+  <text class="p" x="150" y="350">- Write natural language prompt and generate guideline draft</text>
+  <text class="p" x="150" y="375">- Edit id, operation and params manually if needed</text>
+  <text class="p" x="150" y="400">- Save guideline to profile and execute from Validation tab</text>
+  <text class="p" x="150" y="425">- Example deterministic guideline: road-river crossing creates bridge segment</text>
+</svg>

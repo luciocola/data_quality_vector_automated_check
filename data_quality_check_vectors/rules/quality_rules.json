@@ -1,0 +1,48 @@
+[
+  {
+    "id": "copyright-required",
+    "name": "Copyright must be filled",
+    "description": "Ensure copyright is not empty for all selected layers.",
+    "keywords": ["copyright", "mandatory", "empty", "all"],
+    "action": "require_field_not_empty",
+    "params": {
+      "field": "copyright"
+    }
+  },
+  {
+    "id": "copyright-autofill",
+    "name": "Autofill copyright with current date",
+    "description": "Fill empty copyright values with current date text.",
+    "keywords": ["copyright", "fill", "date", "year"],
+    "action": "set_field_if_empty",
+    "params": {
+      "field": "copyright",
+      "value_template": "Copyright {date}",
+      "create_if_missing": true,
+      "fallback_to_full_layer_when_extent_empty": true
+    }
+  },
+  {
+    "id": "roads-elevation-snap-candidates",
+    "name": "Road near-node elevation check",
+    "description": "Find close road endpoints where elevation is equal and snapping is recommended.",
+    "keywords": ["road", "elevation", "topology", "snap", "connect"],
+    "action": "check_road_endpoint_snap_candidates",
+    "params": {
+      "tolerance_m": 0.01,
+      "elevation_field": "elevation"
+    }
+  },
+  {
+    "id": "railroad-osm-id-snap-candidates",
+    "name": "Railroad near-node OSM ID check",
+    "description": "Find close railroad endpoints with the same osm_id and recommend connecting them.",
+    "keywords": ["railroad", "railway", "osm_id", "topology", "snap", "connect"],
+    "action": "check_road_endpoint_snap_candidates",
+    "params": {
+      "tolerance_m": 0.01,
+      "elevation_field": "osm_id",
+      "select_candidates": true
+    }
+  }
+]

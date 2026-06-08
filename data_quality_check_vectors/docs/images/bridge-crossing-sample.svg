@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+  <defs>
+    <style>
+      .bg { fill: #f6fbff; }
+      .road { stroke: #4a4a4a; stroke-width: 18; fill: none; stroke-linecap: round; }
+      .river { stroke: #2b78b8; stroke-width: 28; fill: none; stroke-linecap: round; }
+      .bridge { stroke: #ff9f1a; stroke-width: 16; fill: none; stroke-linecap: round; }
+      .title { font: 700 24px 'Helvetica Neue', Arial, sans-serif; fill: #173b58; }
+      .txt { font: 15px 'Helvetica Neue', Arial, sans-serif; fill: #2a4f6e; }
+      .lbl { font: 700 15px 'Helvetica Neue', Arial, sans-serif; fill: #1f3f5a; }
+      .dot { fill: #ff9f1a; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1100" height="560"/>
+  <text class="title" x="30" y="45">Sample Imagery - Road/River Crossing to Bridge Segment</text>
+
+  <path class="river" d="M90 360 C240 300, 420 430, 560 340 C700 250, 860 380, 1010 320"/>
+  <path class="road" d="M120 140 C340 210, 520 260, 900 430"/>
+
+  <circle class="dot" cx="560" cy="304" r="8"/>
+  <path class="bridge" d="M520 282 L600 326"/>
+
+  <text class="lbl" x="620" y="312">Created segment</text>
+  <text class="txt" x="620" y="334">name = bridge</text>
+
+  <text class="txt" x="90" y="500">Guideline operation: create_bridge_segment_at_road_river_crossing</text>
+  <text class="txt" x="90" y="525">The plugin detects intersections and inserts short line features on the road geometry at crossing points.</text>
+</svg>

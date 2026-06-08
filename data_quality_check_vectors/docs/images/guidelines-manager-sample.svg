@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <defs>
+    <style>
+      .bg { fill: #f4f7fb; }
+      .panel { fill: #ffffff; stroke: #355c7d; stroke-width: 2; rx: 8; }
+      .title { font: 700 24px 'Helvetica Neue', Arial, sans-serif; fill: #1c3e5a; }
+      .h2 { font: 700 16px 'Helvetica Neue', Arial, sans-serif; fill: #1c3e5a; }
+      .txt { font: 13px 'Helvetica Neue', Arial, sans-serif; fill: #2a4d67; }
+      .input { fill: #fdfefe; stroke: #9db5c8; stroke-width: 1.5; rx: 5; }
+      .btn { fill: #2f6f9f; stroke: #214f71; stroke-width: 1.5; rx: 5; }
+      .btnTxt { font: 700 12px 'Helvetica Neue', Arial, sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="700"/>
+  <text class="title" x="40" y="48">Sample Imagery - Guidelines Manager Layout</text>
+
+  <rect class="panel" x="30" y="80" width="360" height="580"/>
+  <text class="h2" x="50" y="115">Guidelines in selected profile</text>
+  <rect class="input" x="50" y="130" width="320" height="500"/>
+  <text class="txt" x="70" y="170">Owner must be filled (cadastre-owner-required)</text>
+  <text class="txt" x="70" y="200">Road near-node elevation check (roads-elevation...)</text>
+  <text class="txt" x="70" y="230">Bridge segment at road-river crossing (...)</text>
+
+  <rect class="panel" x="420" y="80" width="750" height="580"/>
+  <text class="h2" x="440" y="115">Guideline Assistant (plain language)</text>
+  <rect class="input" x="440" y="130" width="710" height="120"/>
+  <text class="txt" x="455" y="160">If a road is crossing a river create a segment for the crossing</text>
+  <text class="txt" x="455" y="183">and name that element bridge.</text>
+
+  <rect class="input" x="440" y="270" width="520" height="34"/>
+  <text class="txt" x="455" y="292">Choose an example...</text>
+  <rect class="btn" x="975" y="270" width="175" height="34"/>
+  <text class="btnTxt" x="1020" y="292">Use Example</text>
+
+  <rect class="btn" x="440" y="318" width="250" height="36"/>
+  <text class="btnTxt" x="460" y="341">Generate Guideline Draft</text>
+
+  <text class="h2" x="440" y="388">Guideline Editor</text>
+  <rect class="input" x="440" y="400" width="710" height="220"/>
+  <text class="txt" x="455" y="430">id: road-river-bridge-segment</text>
+  <text class="txt" x="455" y="455">operation: create_bridge_segment_at_road_river_crossing</text>
+  <text class="txt" x="455" y="480">params: { road_layer_contains: road, river_layer_contains: river, ... }</text>
+
+  <rect class="btn" x="440" y="634" width="150" height="34"/>
+  <text class="btnTxt" x="462" y="656">Save Guideline</text>
+  <rect class="btn" x="602" y="634" width="170" height="34"/>
+  <text class="btnTxt" x="638" y="656">Save Profile</text>
+</svg>
