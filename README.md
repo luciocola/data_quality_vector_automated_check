@@ -3,6 +3,7 @@
 This repository now uses [data_quality_check_vectors](data_quality_check_vectors) as the main plugin root.
 
 The plugin provides QGIS-based vector data quality checks, guideline-driven validation, deterministic auto-fix workflows, and an immutable-catalogue publishing flow.
+Responsibility for validating the suitability, legality, and consequences of any use of this plugin and its outputs remains entirely with the final user
 
 ## Main Documentation
 
