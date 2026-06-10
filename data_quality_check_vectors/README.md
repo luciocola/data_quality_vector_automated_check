@@ -272,6 +272,7 @@ For bridge creation:
 
 - Some edits are left in an active edit session to let users review before final commit.
 - Geometry and provider capabilities vary by datasource type.
+- Responsibility for validating the suitability, legality, and consequences of any use of this plugin and its outputs remains entirely with the final user.
 
 ## License
 
