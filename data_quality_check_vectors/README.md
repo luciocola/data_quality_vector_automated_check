@@ -55,6 +55,10 @@ It combines classic QA checks (attributes, schema, geometry, topology) with prof
   - `Store In Immutable Catalogue` button creates a feature package with per-feature SHA-256 digests
   - Output can be used as candidate input for immutable catalogue registration
   - Optional direct publish flow prompts for endpoint URL and bearer token, then POSTs the package
+- Auto-Check Agent:
+  - Optional background agent that monitors selected layers for committed edits
+  - Re-runs enabled check categories (attributes, geometry, topology) automatically after each commit
+  - Activate or deactivate at any time without restarting the plugin
 
 ## Tabs Overview
 
@@ -73,6 +77,37 @@ It combines classic QA checks (attributes, schema, geometry, topology) with prof
 - Build guideline drafts from natural language using the Guideline Assistant
 - Use predefined examples to quickly populate prompts
 - Edit operation params as JSON or plain language (auto-converted)
+
+## Auto-Check Agent
+
+The Auto-Check Agent is an optional monitoring mode that runs quality checks automatically
+whenever a layer edit session is committed, without requiring a manual "Run Checks" click.
+
+### How to activate
+
+1. Select the target layers in the **Vector Layers** list.
+2. Configure the desired check parameters (required fields, snap tolerance, etc.).
+3. In the **Auto-Check Agent** group, tick the check categories to watch:
+   - **Attributes** — re-runs required-field non-empty checks after each commit.
+   - **Geometry** — re-runs geometry validity checks after each commit.
+   - **Topology** — re-runs road endpoint near-connectivity checks after each commit.
+4. Enable the **Enable auto-check agent** checkbox.
+
+The status label below the checkboxes confirms how many layers are being monitored.
+Results are appended to the report area after each committed edit.
+
+### How to deactivate
+
+Uncheck **Enable auto-check agent** at any time, or close the plugin dialog.
+All layer signal connections are cleaned up automatically.
+
+### Notes
+
+- The agent monitors only the layers selected at the time it is activated.
+  Re-activate after changing the layer selection to update the monitored set.
+- Auto-checks run on the current map extent (or the drawn AOI if one was picked).
+- No automatic fixes are applied by the agent; it is read-only by design.
+- The agent does not persist between QGIS sessions.
 
 ## Guidelines Engine
 

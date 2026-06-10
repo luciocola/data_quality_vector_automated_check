@@ -208,6 +208,8 @@ class DataQualityCheckDialog(QDialog):
         highlighted_layout.addWidget(self.highlighted_elements_list)
         layout.addWidget(highlighted_group)
 
+        self._build_agent_group(layout)
+
         export_group = QGroupBox("Report Export")
         export_layout = QGridLayout(export_group)
         self.chk_export_json = QCheckBox("JSON")
@@ -353,6 +355,42 @@ class DataQualityCheckDialog(QDialog):
         tab_layout.addWidget(splitter)
 
         self.tabs.addTab(tab, "Guidelines Manager")
+
+    def _build_agent_group(self, parent_layout):
+        agent_group = QGroupBox("Auto-Check Agent")
+        agent_layout = QVBoxLayout(agent_group)
+
+        self.chk_agent_enabled = QCheckBox("Enable auto-check agent")
+        self.chk_agent_enabled.setToolTip(
+            "When active, the agent monitors the selected layers and automatically "
+            "re-runs the enabled check categories after each committed edit."
+        )
+        agent_layout.addWidget(self.chk_agent_enabled)
+
+        cat_row = QHBoxLayout()
+        self.chk_agent_attributes = QCheckBox("Attributes")
+        self.chk_agent_attributes.setChecked(True)
+        self.chk_agent_geometry = QCheckBox("Geometry")
+        self.chk_agent_geometry.setChecked(True)
+        self.chk_agent_topology = QCheckBox("Topology")
+        self.chk_agent_topology.setChecked(False)
+        cat_row.addWidget(QLabel("Watch categories:"))
+        cat_row.addWidget(self.chk_agent_attributes)
+        cat_row.addWidget(self.chk_agent_geometry)
+        cat_row.addWidget(self.chk_agent_topology)
+        cat_row.addStretch()
+        agent_layout.addLayout(cat_row)
+
+        self.lbl_agent_status = QLabel("Agent: inactive")
+        self.lbl_agent_status.setStyleSheet(
+            "QLabel { color: #888; font-style: italic; }"
+        )
+        agent_layout.addWidget(self.lbl_agent_status)
+
+        parent_layout.addWidget(agent_group)
+
+    def set_agent_status(self, text):
+        self.lbl_agent_status.setText(text)
 
     def set_layers(self, layers):
         self.layer_list.clear()

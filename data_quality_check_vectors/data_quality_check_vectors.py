@@ -1,5 +1,6 @@
 """Main plugin implementation for Data Quality Check for Vectors."""
 
+import functools
 import json
 import math
 import os
@@ -127,6 +128,7 @@ class DataQualityCheckVectors:
         self.rule_store.ensure_default_profiles()
         self.embedding_retriever = EmbeddingRetriever()
         self._managed_rules = []
+        self._agent_connections = []  # list of (signal, handler) for cleanup
 
     def initGui(self):
         icon_path = os.path.join(self.plugin_dir, "icon.svg")
@@ -187,11 +189,131 @@ class DataQualityCheckVectors:
         self.dialog.btn_rule_nl_generate.clicked.connect(self._generate_rule_draft_from_manager_prompt)
         self.dialog.rules_list.currentRowChanged.connect(self._on_rule_selected)
 
+        self.dialog.chk_agent_enabled.stateChanged.connect(self._on_agent_enabled_changed)
+        self.dialog.finished.connect(self._on_dialog_closed)
+
         self._update_status_badge()
         self._reload_rules_manager()
         self._refresh_rule_search()
         self.dialog.clear_highlighted_elements()
         self.dialog.show()
+
+    def _on_dialog_closed(self, _result):
+        """Disconnect all agent layer signals when the dialog is closed."""
+        self._agent_disconnect_all()
+
+    # ------------------------------------------------------------------
+    # Auto-Check Agent
+    # ------------------------------------------------------------------
+
+    def _on_agent_enabled_changed(self, state):
+        if self.dialog is None:
+            return
+        if state == Qt.Checked:
+            self._agent_connect_selected_layers()
+        else:
+            self._agent_disconnect_all()
+
+    def _agent_connect_selected_layers(self):
+        self._agent_disconnect_all()
+        if self.dialog is None:
+            return
+
+        selected_ids = self.dialog.selected_layer_ids()
+        layers_by_id = {layer.id(): layer for layer in self._vector_layers()}
+        connected = 0
+
+        for layer_id in selected_ids:
+            layer = layers_by_id.get(layer_id)
+            if layer is None:
+                continue
+
+            def _make_handler(lid):
+                """Return a zero-argument callable that runs checks for lid."""
+                def _handler():
+                    self._agent_run_checks_for_layer(lid)
+                return _handler
+
+            handler = _make_handler(layer.id())
+            layer.editingStopped.connect(handler)
+            self._agent_connections.append((layer.editingStopped, handler))
+            connected += 1
+
+        status = (
+            "Agent: monitoring {} layer(s) — will re-check on every committed edit".format(connected)
+            if connected else "Agent: no layers selected to monitor"
+        )
+        self.dialog.set_agent_status(status)
+
+    def _agent_disconnect_all(self):
+        for signal, handler in self._agent_connections:
+            try:
+                signal.disconnect(handler)
+            except Exception:
+                pass
+        self._agent_connections.clear()
+        if self.dialog:
+            self.dialog.set_agent_status("Agent: inactive")
+
+    def _agent_layer_by_id(self, layer_id):
+        for layer in self._vector_layers():
+            if layer.id() == layer_id:
+                return layer
+        return None
+
+    def _agent_run_checks_for_layer(self, layer_id):
+        """Run the enabled check categories for a single layer and append the result."""
+        layer = self._agent_layer_by_id(layer_id)
+        if layer is None or self.dialog is None:
+            return
+
+        extent = self.picked_extent or self.iface.mapCanvas().extent()
+        lines = [
+            "",
+            "[Agent] Auto-check triggered by edit commit on '{}'  ({})".format(
+                layer.name(), datetime.now().strftime("%H:%M:%S")
+            ),
+        ]
+
+        if self.dialog.chk_agent_attributes.isChecked():
+            required_fields = self.dialog.required_fields()
+            lines.append("  [Attributes]")
+            if required_fields:
+                lines.extend(
+                    "    " + ln
+                    for ln in self._check_required_fields([layer], required_fields, extent)
+                )
+            else:
+                lines.append("    No required fields configured — add them in the Checks group.")
+
+        if self.dialog.chk_agent_geometry.isChecked():
+            lines.append("  [Geometry]")
+            lines.extend(
+                "    " + ln
+                for ln in self._check_geometry_validity([layer], extent)
+            )
+
+        if self.dialog.chk_agent_topology.isChecked():
+            lines.append("  [Topology]")
+            lines.extend(
+                "    " + ln
+                for ln in self._check_road_endpoint_connectivity(
+                    [layer],
+                    extent,
+                    self.dialog.snap_tolerance_spin.value(),
+                    self.dialog.road_elevation_field.text().strip() or "elevation",
+                )
+            )
+
+        self._agent_append_report("\n".join(lines))
+
+    def _agent_append_report(self, text):
+        if self.dialog is None:
+            return
+        existing = self.dialog.results.toPlainText()
+        self.dialog.results.setPlainText(existing + "\n" + "-" * 40 + text)
+
+    # ------------------------------------------------------------------
 
     def pick_area(self):
         if self.dialog.area_mode.currentText() == "Current map extent":
