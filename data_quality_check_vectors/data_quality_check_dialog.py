@@ -42,6 +42,7 @@ class DataQualityCheckDialog(QDialog):
 
         self._build_validation_tab()
         self._build_rules_tab()
+        self._build_osm_ngif_tab()
 
     def _build_validation_tab(self):
         tab = QWidget()
@@ -355,6 +356,22 @@ class DataQualityCheckDialog(QDialog):
         tab_layout.addWidget(splitter)
 
         self.tabs.addTab(tab, "Guidelines Manager")
+
+    def _build_osm_ngif_tab(self):
+        tab = QWidget()
+        tab_layout = QVBoxLayout(tab)
+
+        message = QLabel(
+            "Possibility to convert OSM to NGIF data model and vice versa.\n"
+            "Contact lc@4113engineering.com if interested."
+        )
+        message.setWordWrap(True)
+        message.setAlignment(Qt.AlignCenter)
+        tab_layout.addStretch(1)
+        tab_layout.addWidget(message)
+        tab_layout.addStretch(1)
+
+        self.tabs.addTab(tab, "OSM / NGIF")
 
     def _build_agent_group(self, parent_layout):
         agent_group = QGroupBox("Auto-Check Agent")
